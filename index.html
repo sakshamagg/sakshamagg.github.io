@@ -1,0 +1,47 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script async
+          data-page-url="absolutelynotmysite.com"
+          crossorigin="anonymous"
+     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6851705954091379">
+   </script>
+  <script>
+     window.adsbygoogle = window.adsbygoogle || [];
+     var adBreak = adConfig = function(o) {adsbygoogle.push(o);}
+  </script>
+</head>
+<body>
+  <button onclick="javascript:rewarded()">Rewarded</button>
+  <button onclick="javascript:interstitial()">Interstitial</button>
+  <script>
+  adConfig({preloadAdBreaks: 'on'});
+  function rewarded() {
+   adBreak({
+       type: 'reward',
+       name: 'ad-on-game-reward',
+       beforeReward: (showAd) => showAd(),
+       adDismissed: () => console.log('adDismissed'),
+       adViewed: () => console.log('adViewed'),
+       adBreakDone: (placementInfo) => console.log('adBreakDone', placementInfo),
+     });
+  }
+  function interstitial() {
+   adBreak({
+       type: 'start',
+       name: 'ad-on-game-start',
+       beforeAd: () => console.log('beforeAd'),
+       afterAd: () => console.log('afterAd'),
+       adBreakDone: (placementInfo) => console.log('adBreakDone', placementInfo),
+     });
+  }
+
+  </script>
+  
+  <p>
+  Complete demo: <a href="http://arrowsamples.com/slotcar.html">http://arrowsamples.com/slotcar.html</a>
+  </p>
+  
+  <iframe src="https://arrowsamples.com/slotcar.html#deid=44755594" width=300 height=640></iframe>
+  <iframe src="https://arrowsamples.com/slotcar.html#deid=44755593" width=300 height=640></iframe>
+</body>
+
