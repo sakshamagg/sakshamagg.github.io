@@ -1,0 +1,23 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script async
+          crossorigin="anonymous"
+     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6851705954091379">
+   </script>
+  <script>
+     window.adsbygoogle = window.adsbygoogle || [];
+     var adBreak = adConfig = function(o) {adsbygoogle.push(o);}
+  </script>
+</head>
+<body>
+  <button onclick="javascript:rewarded()">Rewarded</button>
+  <button onclick="javascript:interstitial()">Interstitial</button>
+  <script>
+   adBreak({
+       type: 'preroll',
+       name: 'PreRoll',
+       beforeAd: () => console.log('beforeAd'),
+       adBreakDone: (placementInfo) => console.log('adBreakDone', placementInfo),
+     });
+  </script>
+</body>
