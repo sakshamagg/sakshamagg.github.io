@@ -13,11 +13,30 @@
   <button onclick="javascript:rewarded()">Rewarded</button>
   <button onclick="javascript:interstitial()">Interstitial</button>
   <script>
-   adBreak({
+    adBreak({
        type: 'preroll',
        name: 'PreRoll',
        beforeAd: () => console.log('beforeAd'),
        adBreakDone: (placementInfo) => console.log('adBreakDone', placementInfo),
      });
+  function rewarded() {
+   adBreak({
+       type: 'reward',
+       name: 'ad-on-game-reward',
+       beforeReward: (showAd) => showAd(),
+       adDismissed: () => console.log('adDismissed'),
+       adViewed: () => console.log('adViewed'),
+       adBreakDone: (placementInfo) => console.log('adBreakDone', placementInfo),
+     });
+  }
+  function interstitial() {
+   adBreak({
+       type: 'start',
+       name: 'ad-on-game-start',
+       beforeAd: () => console.log('beforeAd'),
+       afterAd: () => console.log('afterAd'),
+       adBreakDone: (placementInfo) => console.log('adBreakDone', placementInfo),
+     });
+  }
   </script>
 </body>
