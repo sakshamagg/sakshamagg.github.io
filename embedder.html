@@ -1,0 +1,85 @@
+<head>
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div style="display: flex">
+  <div>
+	 <textarea id="input" contenteditable="true" spellcheck="False" class="language-html" rows="60" cols="100" oninput="markDirty()">
+   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async
+       crossorigin="anonymous"
+       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+       data-page-url="absolutelynotmysite.com"
+       data-ad-client="ca-pub-6851705954091379"
+       data-ad-host="ca-host-pub-1529374138551099">
+    </script>
+    <script>
+       window.adsbygoogle = window.adsbygoogle || [];
+       var adBreak = adConfig = function(o) {adsbygoogle.push(o);}
+    </script>
+   </head>
+   <body>
+     <button onclick="javascript:rewarded()">Rewarded</button>
+     <button onclick="javascript:interstitial()">Interstitial</button>
+     <script>
+     adConfig({preloadAdBreaks: 'on'});
+     function rewarded() {
+      adBreak({
+          type: 'reward',
+          name: 'ad-on-game-reward',
+          beforeReward: (showAd) => showAd(),
+          adDismissed: () => console.log('adDismissed'),
+          adViewed: () => console.log('adViewed'),
+          adBreakDone: (placementInfo) => console.log('adBreakDone', placementInfo),
+        });
+     }
+     function interstitial() {
+      adBreak({
+          type: 'start',
+          name: 'ad-on-game-start',
+          beforeAd: () => console.log('beforeAd'),
+          afterAd: () => console.log('afterAd'),
+          adBreakDone: (placementInfo) => console.log('adBreakDone', placementInfo),
+        });
+     }
+     </script>
+   </body>
+   </textarea>
+   </div>
+   
+   <div>
+    <button id="button" onclick="updateContents()">Update!</button>
+    <br/>
+    <br/>
+		<iframe id="frame" srcdoc="" width=400 height=800></iframe>
+   </div>
+   </div>
+      
+   <script>
+   	function updateContents() {
+    	const content = document.getElementById('input').value;
+			document.getElementById('frame').srcdoc = content;
+      markClean();
+    }
+    function markDirty() {
+    	document.getElementById("button").style.background = 'orange';
+      document.getElementById("button").innerHTML = "Update!";
+    }
+    function markClean() {
+    	document.getElementById("button").style.background = 'lightgreen';
+      document.getElementById("button").innerHTML = "Updated.";
+    }
+    window.onload = function() {
+    	document.onkeydown = function(event) {
+        if (event.key == "s" && (event.ctrlKey || event.metaKey)) {
+          event.preventDefault();
+        	updateContents();
+          return false;  // To prevent normal minimizing command
+        }
+      };
+    	markDirty();
+    };
+   </script>
+</body>
+
