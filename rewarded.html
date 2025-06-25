@@ -1,0 +1,63 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script async
+     crossorigin="anonymous"
+     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+     data-adtest="on"
+     data-ad-client="ca-google">
+  </script>
+  <script>
+    window.adsbygoogle = window.adsbygoogle || [];
+  </script>
+</head>
+<body>
+  <button onclick="javascript:loadRewardedAd()">Load rewarded ad</button><br><br>
+  <button id="show_ad_button" disabled>No Ad loaded</button><br><br><br><br>
+  Log<br>
+  <textarea readonly style="width:100%; height:500px" value="">
+  </textarea>
+  <script>
+    function appendLog(text) {
+      document.querySelector('textarea').value += new Date(Date.now()).toISOString() + ': ' + text + '\n';
+    }
+    function loadRewardedAd() {
+      const params = {
+        google_reactive_ad_format: 11,
+        google_wrap_fullscreen_ad: true,
+        google_video_play_muted: false,
+        google_acr: onRewardedAdLoad,
+        google_tag_origin: 'rrm',
+      };
+      appendLog('Sending ad request: ' + JSON.stringify(params));
+      window.adsbygoogle.push({params});
+      const button = document.querySelector('#show_ad_button');
+      button.textContent = "Loading ad...";
+    }
+    function onRewardedAdLoad(ad) {
+      if (!ad) {
+        appendLog("Ad failed to load");
+        const button = document.querySelector('#show_ad_button');
+        button.textContent = "Ad failed :( Try again";
+        return;
+      }
+      appendLog("Ad loaded");
+      window.ad = ad;
+      const button = document.querySelector('#show_ad_button');
+      button.disabled = false;
+      button.textContent = "Show ad";
+      button.onclick = () => {showAd(ad);};
+    }
+    function showAd(ad) {
+      appendLog("Showing ad");
+      ad.show(onAdClose);
+    }
+    function onAdClose(closeStatus) {
+      appendLog("Ad closed with status: " + JSON.stringify(closeStatus));
+      const button = document.querySelector('#show_ad_button');
+      button.disabled = true;
+      button.textContent = "No Ad loaded";
+      button.onclick = null;
+      alert(closeStatus.status == "viewed"? "Reward granted" : "Reward cancelled");
+    }
+  </script>
+</body>
